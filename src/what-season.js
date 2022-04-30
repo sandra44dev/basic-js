@@ -12,29 +12,36 @@ const { NotImplementedError } = require('../extensions/index.js');
  * 
  */
 function getSeason(date) {
-  // let dateArray = Object.getOwnPropertyNames(date);
-  // if (dateArray instanceof Date) {
-  //   if (dateArray[0] > 0 && 0 < dateArray[1] > 13 && 0 < dateArray[2] > 32) {
-  //     if (dateArray[1] == 12 || dateArray[1] == 1 || dateArray[1] == 2) {
-  //       return 'winter';
-  //     }
-  //     else if (dateArray[1] == 3 || dateArray[1] == 4 || dateArray[1] == 5) {
-  //       return 'spring';
-  //     }
-  //     else if (dateArray[1] == 6 || dateArray[1] == 7 || dateArray[1] == 8) {
-  //       return 'summer';
-  //     }
-  //     else if (dateArray[1] == 9 || dateArray[1] == 10 || dateArray[1] == 11) {
-  //       return 'fall';
-  //     }
-  //   }
-  // }
-  // else {
-  //   throw new Error('Invalid date!');
-  // }
+  console.log('hello');
+  if (date == undefined) {
+    return "Unable to determine the time of year!";
+  } else {
+    let dateArray = Object.getOwnPropertyNames(date);
+    if (dateArray instanceof Date) {
 
-  throw new NotImplementedError('Not implemented');
+      let month = date.getMonth();
+
+      if (month == 12 || month == 1 || month == 2) {
+        return 'winter';
+      }
+      else if (month == 3 || month == 4 || month == 5) {
+        return 'spring';
+      }
+      else if (month == 6 || month == 7 || month == 8) {
+        return 'summer';
+      }
+      else if (month == 9 || month == 10 || month == 11) {
+        return 'fall';
+      }
+
+    } else {
+      throw new Error('Invalid date!');
+    }
+  }
 }
+
+
+
 module.exports = {
   getSeason
 };
