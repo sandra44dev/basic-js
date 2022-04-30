@@ -15,20 +15,21 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 
 function createDreamTeam(members) {
-  let teamName = [];
-  members.sort();
-
-  for (i = 0; i < members.length; i++) {
-    if (typeof members[i] == 'string') {
-      let x;
-      x = members[i].slice(0, 1).toUpperCase(); // возьми первый символ приведи к верхнему регистру
-      teamName.push(x); //закинь в массив
+  if (Array.isArray(members)) {
+    let teamName = [];
+    for (i = 0; i < members.length; i++) { //возьми первое имя
+      if (typeof members[i] == 'string') { //проверь на строку
+        //возьми первый символ имени, который не является пробелом
+        let x;
+        x = members[i].trimStart().slice(0, 1);
+        teamName.push(x.toUpperCase());
+      }
     }
+    teamName.sort();
+    teamName = teamName.join('');
+    return teamName;
   }
-  teamName = teamName.join('');
-  return teamName;
 }
-
 module.exports = {
   createDreamTeam
 };
