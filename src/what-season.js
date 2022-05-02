@@ -12,31 +12,26 @@ const { NotImplementedError } = require('../extensions/index.js');
  * 
  */
 function getSeason(date) {
-  console.log('hello');
-  if (date == undefined) {
-    return "Unable to determine the time of year!";
-  } else {
-    let dateArray = Object.getOwnPropertyNames(date);
-    if (dateArray instanceof Date) {
+  if (!date) {
+    return 'Unable to determine the time of year!';
+  }
+  if ((!(date instanceof Date)) || (Object.keys(date).length > 0)) { // проверка на утку
+    throw new Error("Invalid date!");
+  }
 
-      let month = date.getMonth();
+  let month = date.getMonth();
 
-      if (month == 12 || month == 1 || month == 2) {
-        return 'winter';
-      }
-      else if (month == 3 || month == 4 || month == 5) {
-        return 'spring';
-      }
-      else if (month == 6 || month == 7 || month == 8) {
-        return 'summer';
-      }
-      else if (month == 9 || month == 10 || month == 11) {
-        return 'fall';
-      }
-
-    } else {
-      throw new Error('Invalid date!');
-    }
+  if (month == 0 || month == 1 || month == 11) {
+    return 'winter';
+  }
+  else if (month == 2 || month == 3 || month == 4) {
+    return 'spring';
+  }
+  else if (month == 5 || month == 6 || month == 7) {
+    return 'summer';
+  }
+  else if (month == 8 || month == 9 || month == 10) {
+    return 'fall';
   }
 }
 
